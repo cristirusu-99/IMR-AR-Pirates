@@ -24,7 +24,7 @@
 		GameObject _markerPrefab;
 
 		List<GameObject> _spawnedObjects;
-
+		public Camera _referenceCamera;
 		void Start()
 		{
 			_locations = new Vector2d[_locationStrings.Length];
@@ -43,6 +43,16 @@
 		private void Update()
 		{
 			int count = _spawnedObjects.Count;
+			if (Input.GetMouseButtonUp(1))
+			{
+				var mousePosScreen = Input.mousePosition;
+				//assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
+				//http://answers.unity3d.com/answers/599100/view.html
+				mousePosScreen.z = _referenceCamera.transform.localPosition.y;
+				var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
+				var latlongDelta = _map.WorldToGeoPosition(pos);
+				_locations[0] = latlongDelta;
+			}
 			for (int i = 0; i < count; i++)
 			{
 				var spawnedObject = _spawnedObjects[i];
