@@ -79,9 +79,9 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-            Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
-            Debug.Log("Created room with code: " + roomCode.text);
-            PhotonNetwork.CreateRoom(roomCode.text, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
+        Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
+        PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
     }
 
     public void JoinRoom()
