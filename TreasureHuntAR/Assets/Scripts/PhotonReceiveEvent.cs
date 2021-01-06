@@ -24,10 +24,11 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
         {
             object[] data = (object[])photonEvent.CustomData;
             Vector2 latLong = (Vector2)data[0];
-            for (int index = 0; index < data.Length; ++index)
+            Debug.Log("Coord X: " + latLong.x + "Coord Y:" + latLong.y);
+           /* for (int index = 0; index < latLong.Count(); ++index)
             {
                 Debug.Log("Coordonata: " + latLong[index]);
-            }
+            }*/
         }
     }
 }

@@ -98,6 +98,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         if(PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(5, 10));
+            Debug.Log("Smecherie pe sistem");
         }
     }
 
