@@ -1,5 +1,6 @@
 ﻿namespace Mapbox.Examples
 {
+	using System;
 	using UnityEngine;
 	using Mapbox.Utils;
 	using Mapbox.Unity.Map;
@@ -26,7 +27,7 @@
 		GameObject[] markers;
 		List<GameObject> _spawnedObjects;
 		public Camera _referenceCamera;
-		static int curentpos = 0;
+		int curentpos = 0;
 		
 		void Start()
 		{
@@ -40,8 +41,8 @@
 			
 			
 			if (Input.GetMouseButtonUp(1))
-			{	
-				if ( SpawnOnMap.curentpos != _spawnedObjects.Count)
+			{
+				if (curentpos != _spawnedObjects.Count)
 					return ;
 				else
 				{
@@ -51,16 +52,16 @@
 					mousePosScreen.z = _referenceCamera.transform.localPosition.y;
 					var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 					var latlongDelta = _map.WorldToGeoPosition(pos);
-					_locations[SpawnOnMap.curentpos] = latlongDelta;
-					//GameObject.Find("Coord_Riddle" + i.ToString() ).GetComponent<Text>().text=latlongDelta.x.ToString() + " " + latlongDelta.y.ToString();
-					var instance = Instantiate(markers[SpawnOnMap.curentpos]);
+					_locations[curentpos] = latlongDelta;
+					string riddleNumber = GameObject.Find("RiddleNumber").GetComponent<Text>().text;
+					GameObject.Find("Coord_Riddle" + riddleNumber).GetComponent<Text>().text = latlongDelta.x.ToString() + " " + latlongDelta.y.ToString();
+					GameObject.Find("RiddleNumber").GetComponent<Text>().text = (Int32.Parse(riddleNumber) + 1).ToString();
+					var instance = Instantiate(markers[curentpos]);
 					_spawnedObjects.Add(instance);
-					SpawnOnMap.curentpos++;
+					curentpos++;
 					
 				}
-
 				SceneManager.LoadScene("Home");
-				
 			}
 			int count = _spawnedObjects.Count;
 			for (int i = 0; i < count; i++)
@@ -70,6 +71,8 @@
 				spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
 				spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
 			}
+
+			
 		}
 	}
 }

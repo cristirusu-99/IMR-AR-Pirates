@@ -547,7 +547,7 @@ GameObject:
   - component: {fileID: 236532060}
   - component: {fileID: 236532059}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RiddleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,6 +889,7 @@ GameObject:
   - component: {fileID: 404332276}
   - component: {fileID: 404332275}
   - component: {fileID: 404332274}
+  - component: {fileID: 404332277}
   m_Layer: 5
   m_Name: Pin button
   m_TagString: Untagged
@@ -972,8 +973,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4833286319631046868, guid: a1b7e53ff14ad5d4b8ed01cd0020b82e,
-          type: 3}
+      - m_Target: {fileID: 1208168621}
         m_TargetAssemblyTypeName: GetRiddles, Assembly-CSharp
         m_MethodName: StoreRiddles
         m_Mode: 1
@@ -1023,6 +1023,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404332272}
   m_CullTransparentMesh: 0
+--- !u!114 &404332277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404332272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d4137d4a61107418547117c521868a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &407654635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2454,6 +2466,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818091068}
   m_CullTransparentMesh: 0
+--- !u!1 &825617390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825617394}
+  - component: {fileID: 825617393}
+  - component: {fileID: 825617392}
+  - component: {fileID: 825617391}
+  m_Layer: 0
+  m_Name: RiddleNumber
+  m_TagString: Gugu
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &825617391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825617390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db3a516f4a7041b4a415b35843f8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useSingleInstance: 0
+--- !u!114 &825617392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825617390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 1
+--- !u!222 &825617393
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825617390}
+  m_CullTransparentMesh: 0
+--- !u!224 &825617394
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825617390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -12.125934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 663.559, y: 341.5092}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &861912764
 GameObject:
   m_ObjectHideFlags: 0
@@ -4083,6 +4188,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1208168619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208168622}
+  - component: {fileID: 1208168621}
+  - component: {fileID: 1208168620}
+  m_Layer: 0
+  m_Name: Riddles
+  m_TagString: Gege
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1208168620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208168619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db3a516f4a7041b4a415b35843f8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useSingleInstance: 0
+--- !u!114 &1208168621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208168619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ba83e5f0b87eb41b3e6aa71c46b076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riddle:
+  - 
+  - 
+  - 
+  - 
+  - 
+  text_riddle:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  coord_riddle:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!4 &1208168622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208168619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 663.559, y: 341.5092, z: -12.125934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1219930500
 GameObject:
@@ -6679,6 +6859,7 @@ GameObject:
   - component: {fileID: 2089187552}
   - component: {fileID: 2089187551}
   - component: {fileID: 2089187557}
+  - component: {fileID: 2089187558}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6819,7 +7000,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2089187550}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce528bc5fda1fde478781c3bed00751e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c9a1406c4873aa488729e6ff68f2177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2089187558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089187550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a54c39a36e48ab41ac31eb0f1af05e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2138978229
