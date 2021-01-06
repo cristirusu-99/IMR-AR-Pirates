@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Linq;
 
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
@@ -87,25 +86,16 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
-        Debug.Log("Joining room with code: " + roomCode.text);
-        bool joinable = PhotonNetwork.JoinRoom(roomCode.text);
-        if (joinable==false)
-        {
-            Resources.FindObjectsOfTypeAll<GameObject>()
-                     .FirstOrDefault(g => g.name == "Pop-upRoomCode")
-                     .SetActive(true);
-            Debug.Log("Enter code!");
-            GameObject.Find("InputField").SetActive(false);
-        }
-        Debug.Log(joinable);
+            InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
+            Debug.Log("Joining room with code: " + roomCode.text);
+            PhotonNetwork.JoinRoom(roomCode.text);
     }
     #region MonoBehaviourPunCallbacks Callbacks
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        if(PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(5, 10));
             Debug.Log("Smecherie pe sistem");
@@ -125,11 +115,6 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Resources.FindObjectsOfTypeAll<GameObject>()
-                     .FirstOrDefault(g => g.name == "Pop-upRoomCode")
-                     .SetActive(true);
-        Debug.Log("Enter code!");
-        GameObject.Find("InputField").SetActive(false);
         Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available");
 
         // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
