@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-
+using System.Linq;
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
     #region Private Serializable Fields
@@ -86,9 +86,18 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-            InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
-            Debug.Log("Joining room with code: " + roomCode.text);
-            PhotonNetwork.JoinRoom(roomCode.text);
+        InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
+        Debug.Log("Joining room with code: " + roomCode.text);
+        bool joinable = PhotonNetwork.JoinRoom(roomCode.text);
+        if (joinable == false)
+        {
+            Resources.FindObjectsOfTypeAll<GameObject>()
+                     .FirstOrDefault(g => g.name == "Pop-upRoomCode")
+                     .SetActive(true);
+            Debug.Log("Enter code!");
+            GameObject.Find("InputField").SetActive(false);
+        }
+        Debug.Log(joinable);
     }
     #region MonoBehaviourPunCallbacks Callbacks
 
