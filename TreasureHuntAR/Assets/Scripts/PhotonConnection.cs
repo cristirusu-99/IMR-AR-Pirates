@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
+using System.Globalization;
+
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
     #region Private Serializable Fields
@@ -82,6 +84,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
         Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
         PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+        PhotonNetwork.LoadLevel("ARScene");
     }
 
     public void JoinRoom()
@@ -106,8 +109,14 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     {
         if(PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
-            photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(5, 10));
-            Debug.Log("Smecherie pe sistem");
+            if (PhotonNetwork.IsMasterClient)
+            {
+                string coord = GameObject.Find("Coord_Riddle1").GetComponent<Text>().text;
+                string[] latLong = coord.Split(' ');
+                float x = float.Parse(latLong[0], CultureInfo.InvariantCulture.NumberFormat);
+                float y = float.Parse(latLong[1], CultureInfo.InvariantCulture.NumberFormat);
+                photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(x, y));
+            }
         }
     }
 

@@ -4103,7 +4103,7 @@ GameObject:
   - component: {fileID: 1520586888}
   - component: {fileID: 1520586887}
   m_Layer: 0
-  m_Name: Ma-sa
+  m_Name: ChangeToRiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4300,6 +4300,7 @@ GameObject:
   - component: {fileID: 1690852173}
   - component: {fileID: 1690852172}
   - component: {fileID: 1690852174}
+  - component: {fileID: 1690852175}
   m_Layer: 0
   m_Name: Photon
   m_TagString: Untagged
@@ -4346,6 +4347,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11eeda9752f6756478faaf1e13cc72ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1690852175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690852171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db3a516f4a7041b4a415b35843f8841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _useSingleInstance: 0
 --- !u!1 &1704667386
 GameObject:
   m_ObjectHideFlags: 0
