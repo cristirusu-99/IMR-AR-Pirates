@@ -22,7 +22,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
     /// </summary>
     string gameVersion = "1";
-
+    PhotonSendEvent photonSendEvent = new PhotonSendEvent();
 
     #endregion
 
@@ -92,6 +92,14 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     }
     #region MonoBehaviourPunCallbacks Callbacks
 
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if(PhotonNetwork.CurrentRoom.PlayerCount >= 1)
+        {
+            photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(5, 10));
+        }
+    }
 
     public override void OnConnectedToMaster()
     {
