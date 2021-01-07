@@ -24,7 +24,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
     /// </summary>
     string gameVersion = "1";
-    PhotonSendEvent photonSendEvent;
+    PhotonSendEvent photonSendEvent = new PhotonSendEvent();
 
     #endregion
 
@@ -49,7 +49,6 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     void Start()
     {
         Connect();
-        photonSendEvent = new PhotonSendEvent();
     }
 
 
@@ -82,18 +81,17 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        /*Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
-        Debug.Log("Creating room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));*/
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });;
+        Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
+        Debug.Log("Creating room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
+        PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
         //PhotonNetwork.LoadLevel("ARScene");
     }
 
     public void JoinRoom()
     {
-        /*InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
-        Debug.Log("Joining room with code: " + roomCode.text);*/
-        PhotonNetwork.JoinRandomRoom();
-       /* bool joinable = PhotonNetwork.JoinRoom(roomCode.text);
+        InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
+        Debug.Log("Joining room with code: " + roomCode.text);
+        bool joinable = PhotonNetwork.JoinRoom(roomCode.text);
         if (joinable == false)
         {
             Resources.FindObjectsOfTypeAll<GameObject>()
@@ -102,7 +100,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
             Debug.Log("Enter code!");
             GameObject.Find("InputField").SetActive(false);
         }
-        Debug.Log(joinable);*/
+        Debug.Log(joinable);
     }
     #region MonoBehaviourPunCallbacks Callbacks
 
