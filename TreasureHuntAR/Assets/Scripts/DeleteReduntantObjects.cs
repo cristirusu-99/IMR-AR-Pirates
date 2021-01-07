@@ -9,10 +9,13 @@ public class DeleteReduntantObjects : MonoBehaviour
     {
         GameObject[] riddlesRiddles = GameObject.FindGameObjectsWithTag("Gege");
         GameObject[] riddlesRiddlesNumber = GameObject.FindGameObjectsWithTag("Gugu");
-        if(riddlesRiddles.Length > 1)
+        /*GameObject[] photon = GameObject.FindGameObjectsWithTag("Photon");
+        if(photon.Length > 1)
         {
             //Destroy(riddlesRiddles[1]);
-        }
+            Destroy(photon[1]);
+
+        }*/
         if(riddlesRiddlesNumber.Length > 1)
         {
             Destroy(riddlesRiddlesNumber[1]);
