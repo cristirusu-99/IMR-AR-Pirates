@@ -82,9 +82,9 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
-        Debug.Log("Creating room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
+        Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
         PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-        //PhotonNetwork.LoadLevel("ARScene");
+        PhotonNetwork.LoadLevel("ARScene");
     }
 
     public void JoinRoom()
@@ -115,21 +115,9 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
                 string[] latLong = coord.Split(' ');
                 float x = float.Parse(latLong[0], CultureInfo.InvariantCulture.NumberFormat);
                 float y = float.Parse(latLong[1], CultureInfo.InvariantCulture.NumberFormat);
-                Debug.Log("Coco x: " + x + " Coco y: ");
                 photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(x, y));
             }
         }
-    }
-
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Create Room with success");
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        Debug.Log(returnCode + " " + message);
-        //base.OnCreateRoomFailed(returnCode, message);
     }
 
     public override void OnConnectedToMaster()
