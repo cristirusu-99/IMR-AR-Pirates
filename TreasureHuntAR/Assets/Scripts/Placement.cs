@@ -29,7 +29,7 @@ public class Placement : MonoBehaviour
 
     void Update()
     {
-        if(GetCurrentLocation().x > 47.167063443549914 && GetCurrentLocation().x < 47.16724126519584 && GetCurrentLocation().y > 27.543318048354156 && GetCurrentLocation().y < 27.54311071772677);
+        //if(GetCurrentLocation().x > 47.167063443549914 && GetCurrentLocation().x < 47.16724126519584 && GetCurrentLocation().y > 27.543318048354156 && GetCurrentLocation().y < 27.54311071772677);
         // shoot a raycast from the center of the screen
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         rayManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.PlaneEstimated);
