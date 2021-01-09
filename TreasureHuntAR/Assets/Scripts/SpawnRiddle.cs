@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
-using System;
 using UnityEngine.XR.ARSubsystems;
 
 public class SpawnRiddle : MonoBehaviour
@@ -31,7 +29,10 @@ public class SpawnRiddle : MonoBehaviour
 
     private void PlaceObject()
     {
-        Instantiate(objectToPlace, placementPose.position, placementPose.rotation);
+        Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
+        Vector3 objectRotation = new Vector3(1, 1, 1);
+        Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
+        /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/
     }
 
     private void UpdatePlacementIndicator()
