@@ -23,12 +23,15 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
         if (eventCode == 1)
         {
             object[] data = (object[])photonEvent.CustomData;
-            Vector2 latLong = (Vector2)data[0];
-            Debug.Log("Coord X: " + latLong.x + "Coord Y:" + latLong.y);
-           /* for (int index = 0; index < latLong.Count(); ++index)
+            double[] riddlesCoords = (double[])data[0];
+            string[] riddlesTexts = (string[])data[1];
+            double[] treasureCoords = (double[])data[2];
+            for(int i = 0, j = 0; i < riddlesTexts.Length; i++, j += 2)
             {
-                Debug.Log("Coordonata: " + latLong[index]);
-            }*/
+                Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
+                Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);            
+            }
+            Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);
         }
     }
 }

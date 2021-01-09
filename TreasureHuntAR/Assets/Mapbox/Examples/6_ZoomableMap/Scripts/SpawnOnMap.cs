@@ -1,14 +1,12 @@
 ﻿namespace Mapbox.Examples
 {
-	using System;
 	using UnityEngine;
 	using Mapbox.Utils;
 	using Mapbox.Unity.Map;
-	using Mapbox.Unity.MeshGeneration.Factories;
 	using Mapbox.Unity.Utilities;
 	using System.Collections.Generic;
     using UnityEngine.SceneManagement;
-    using UnityEngine.UI;
+ 
 
     public class SpawnOnMap : MonoBehaviour
 	{
@@ -53,7 +51,6 @@
 					var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 					var latlongDelta = _map.WorldToGeoPosition(pos);
 					_locations[curentpos] = latlongDelta;
-					
 					if(ScenesData.treasForT == true)
 						{
 							ScenesData.AddNewTreasureCord(latlongDelta);

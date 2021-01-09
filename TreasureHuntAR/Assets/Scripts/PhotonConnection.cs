@@ -7,6 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Linq;
 using System.Globalization;
+using ExitGames.Client.Photon;
 
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
@@ -68,10 +69,11 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
         if (PhotonNetwork.IsConnected)
         {
-
+            Debug.Log("I'm connected already");
         }
         else
         {
+            Debug.Log("Connecting now");
             // #Critical, we must first and foremost connect to Photon Online Server.
             PhotonNetwork.ConnectUsingSettings();
             PhotonNetwork.GameVersion = gameVersion;
@@ -84,7 +86,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
         Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
         PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-        PhotonNetwork.LoadLevel("ARScene");
+       
     }
 
     public void JoinRoom()
@@ -97,10 +99,8 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
             Resources.FindObjectsOfTypeAll<GameObject>()
                      .FirstOrDefault(g => g.name == "Pop-upRoomCode")
                      .SetActive(true);
-            Debug.Log("Enter code!");
             GameObject.Find("InputField").SetActive(false);
         }
-        Debug.Log(joinable);
     }
     #region MonoBehaviourPunCallbacks Callbacks
 
@@ -111,11 +111,9 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                string coord = GameObject.Find("Coord_Riddle1").GetComponent<Text>().text;
-                string[] latLong = coord.Split(' ');
-                float x = float.Parse(latLong[0], CultureInfo.InvariantCulture.NumberFormat);
-                float y = float.Parse(latLong[1], CultureInfo.InvariantCulture.NumberFormat);
-                photonSendEvent.SendHintsAndBoardLatAndLong(new Vector2(x, y));
+                object[] content = new object[] { ScenesData.GetValidRiddlesCoords(), ScenesData.GetValidRiddlesText(), ScenesData.treasureCoords };
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                PhotonNetwork.RaiseEvent(1, content, raiseEventOptions, SendOptions.SendReliable);
             }
         }
     }
@@ -141,6 +139,10 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel("ARScene");
+        }
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         #endregion
     }
