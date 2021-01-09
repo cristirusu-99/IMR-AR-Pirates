@@ -53,13 +53,24 @@
 					var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 					var latlongDelta = _map.WorldToGeoPosition(pos);
 					_locations[curentpos] = latlongDelta;
-					ScenesData.AddNewRiddleCoords(latlongDelta);
+					
+					if(ScenesData.treasForT == true)
+						{
+							ScenesData.AddNewTreasureCord(latlongDelta);
+						}
+					else
+						{
+							ScenesData.AddNewRiddleCoords(latlongDelta);
+						}
 					var instance = Instantiate(markers[curentpos]);
 					_spawnedObjects.Add(instance);
 					curentpos++;
 					
 				}
-				SceneManager.LoadScene("Riddle");
+				if(ScenesData.treasForT == true)
+					SceneManager.LoadScene("Treasure");
+				else
+					SceneManager.LoadScene("Riddle");
 			}
 			int count = _spawnedObjects.Count;
 			for (int i = 0; i < count; i++)

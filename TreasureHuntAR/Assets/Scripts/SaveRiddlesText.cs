@@ -8,6 +8,7 @@ public class SaveRiddlesText : MonoBehaviour
 
     void Start()
     {
+        ScenesData.treasForT = false;
         ScenesData.nicknameIntroduced = true;
         Debug.Log("Current riddle :  " + ScenesData.currentRiddle);
         GameObject originalRiddle = GameObject.Find("SetRiddles");

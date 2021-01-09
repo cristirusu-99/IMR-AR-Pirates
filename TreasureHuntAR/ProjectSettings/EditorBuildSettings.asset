@@ -21,11 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Location.unity
     guid: 0435f94b013be6446ace1354a961675a
   - enabled: 1
-    path: Assets/Scenes/ARScene.unity
-    guid: d950124658bdaa34c9026cfe90dc4b7a
-  - enabled: 1
     path: Assets/Scenes/Riddle.unity
     guid: 0bd87f2c5d77c7048bfe61a65a80618f
+  - enabled: 1
+    path: Assets/Scenes/Treasure.unity
+    guid: 0257eb4ee694a4845941225e438ad5da
+  - enabled: 1
+    path: Assets/Scenes/ARScene.unity
+    guid: ae0197245862f4e4f9a79c073e2574ef
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: cbaab236a8b82ab4db6712f14f81bbe0,
       type: 2}
