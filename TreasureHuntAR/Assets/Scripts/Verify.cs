@@ -3,6 +3,18 @@ using UnityEngine.UI;
 using System.Linq;
 public class Verify : MonoBehaviour
 {
+
+     void Start()
+    {
+        if (ScenesData.nicknameIntroduced == true)
+        {
+            GameObject.Find("MainMenu").SetActive(false);
+            Resources.FindObjectsOfTypeAll<GameObject>()
+                        .FirstOrDefault(g => g.name == "Lobby")
+                        .SetActive(true);
+        }
+    }
+
     // Start is called before the first frame update
     public void ChangeToSceneIfNicknameNotNull()
     {

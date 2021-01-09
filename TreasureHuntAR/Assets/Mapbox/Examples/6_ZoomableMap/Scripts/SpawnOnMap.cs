@@ -53,9 +53,7 @@
 					var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
 					var latlongDelta = _map.WorldToGeoPosition(pos);
 					_locations[curentpos] = latlongDelta;
-					string riddleNumber = GameObject.Find("RiddleNumber").GetComponent<Text>().text;
-					GameObject.Find("Coord_Riddle" + riddleNumber).GetComponent<Text>().text = latlongDelta.x.ToString() + " " + latlongDelta.y.ToString();
-					GameObject.Find("RiddleNumber").GetComponent<Text>().text = (Int32.Parse(riddleNumber) + 1).ToString();
+					ScenesData.AddNewRiddleCoords(latlongDelta);
 					var instance = Instantiate(markers[curentpos]);
 					_spawnedObjects.Add(instance);
 					curentpos++;
