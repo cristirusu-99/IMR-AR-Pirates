@@ -390,12 +390,12 @@ MonoBehaviour:
   - 47.173826, 27.552185
   _spawnScale: 90
   markers:
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
-  - {fileID: 4889890600477976588, guid: e41091efde6e92c4aa6ae1b35ba756c3, type: 3}
+  - {fileID: 4371189015009565388, guid: c41eb8792d31477438a0b9092896adad, type: 3}
+  - {fileID: 4371189015009565388, guid: b4ed1b15083facd42acc956004b31d1f, type: 3}
+  - {fileID: 4371189015009565388, guid: 6af1b57574d33734db0a800fffd27ac2, type: 3}
+  - {fileID: 4371189015009565388, guid: b0395f0820b8325479748bff0534cc45, type: 3}
+  - {fileID: 4371189015009565388, guid: 05fb8aebc728ca0409e906e6e111e3d0, type: 3}
+  - {fileID: 4371189015009565388, guid: ace7cfc8aeb3cb241bbeb69a01d8bdc1, type: 3}
   _referenceCamera: {fileID: 1158509740}
 --- !u!114 &1950008368
 MonoBehaviour:
