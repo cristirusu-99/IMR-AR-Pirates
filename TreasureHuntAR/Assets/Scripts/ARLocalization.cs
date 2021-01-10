@@ -13,7 +13,7 @@ public class ARLocalization : MonoBehaviour
     {
         if(riddlesCoords != null)
         {
-            //CalculateDistanceBetweenUserAndRiddles();
+            CalculateDistanceBetweenUserAndRiddles();
         }
         
     }
@@ -36,7 +36,8 @@ public class ARLocalization : MonoBehaviour
     public void CalculateDistanceBetweenUserAndRiddles()
     {
         double[] userLocation = GetCurrentLocation();
-        for(int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
+        currentRiddleText = "";
+        for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
             if(DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]) < 20)
             {
@@ -48,8 +49,10 @@ public class ARLocalization : MonoBehaviour
                 {
                     foundRiddles[j] = 1;
                     currentRiddleText = riddlesTexts[j];
+                    break;
                 }
             }
+
         }
     }
 

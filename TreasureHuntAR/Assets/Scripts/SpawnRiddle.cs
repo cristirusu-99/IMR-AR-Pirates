@@ -29,10 +29,14 @@ public class SpawnRiddle : MonoBehaviour
 
     private void PlaceObject()
     {
-        Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
-        Vector3 objectRotation = new Vector3(1, 1, 1);
-        Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
-        /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/
+        if(GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText != "")
+        {
+            Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
+            Vector3 objectRotation = new Vector3(1, 1, 1);
+            Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
+            /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/
+        }
+
     }
 
     private void UpdatePlacementIndicator()
