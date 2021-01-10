@@ -79,11 +79,15 @@ public class ARLocalization : MonoBehaviour
         if (Input.location.status == LocationServiceStatus.Failed)
         {
             print("Unable to determine device location");
-            return new double[] { 0, 0 };
+            double[] userLocation = new double[]{ 0, 0 };
+            PhotonSendEvent.SendCurrentUserLocation(userLocation);
+            return userLocation;
         }
         else
         {
-            return new double[] { Input.location.lastData.latitude, Input.location.lastData.longitude } ;
+            double[] userLocation = new double[] { Input.location.lastData.latitude, Input.location.lastData.longitude };
+            PhotonSendEvent.SendCurrentUserLocation(userLocation);
+            return userLocation;
         }
     }
 }

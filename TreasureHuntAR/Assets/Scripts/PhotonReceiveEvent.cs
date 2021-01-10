@@ -34,6 +34,11 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
             Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);
             GameObject.Find("ARLocalization").GetComponent<ARLocalization>().ReceivedGameCoordsAndTexts(riddlesCoords, treasureCoords, riddlesTexts);
         }
-        
+        if(eventCode == 2)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+            double[] location = (double[])data[0];
+            Debug.Log("Received location: Lat: " + location[0] + " Lon: " + location[1]);
+        }
     }
 }

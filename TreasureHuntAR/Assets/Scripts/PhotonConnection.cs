@@ -111,9 +111,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                object[] content = new object[] { ScenesData.GetValidRiddlesCoords(), ScenesData.GetValidRiddlesText(), ScenesData.treasureCoords };
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-                PhotonNetwork.RaiseEvent(1, content, raiseEventOptions, SendOptions.SendReliable);
+                PhotonSendEvent.SendHintsAndBoardLatAndLong();       
             }
         }
     }
