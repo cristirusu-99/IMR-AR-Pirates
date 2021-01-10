@@ -23,37 +23,37 @@
 
         [SerializeField]
         GameObject[] markers;
-        List<GameObject> _spawnedObjects;
+        GameObject[] _spawnedObjects;
         public Camera _referenceCamera;
 
         void Start()
         {
             _locations = new Vector2d[markers.Length];
-            _spawnedObjects = new List<GameObject>();
-            int i;
-            int j;
+            _spawnedObjects = new GameObject[6];
             GameObject instance;
-            for (i = 0, j = 0; j < ScenesData.numberOfRiddles - 1; i += 2, j++)
+            for (int i = 0, j = 0; j < ScenesData.numberOfRiddles; i += 2, j++)
             {
-                instance = Instantiate(markers[j]);
-                _spawnedObjects.Add(instance);
-                _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                if(ScenesData.riddlesCoords[i] != 0)
+                {
+                    instance = Instantiate(markers[j]);
+                    _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                    _spawnedObjects[j] = instance;
+                    
+                }
             }
-
-            instance = Instantiate(markers[j]);
-            _spawnedObjects.Add(instance);
-            _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
 
             if (ScenesData.treasureCoords[0] != 0)
             {
                  instance = Instantiate(markers[5]);
-                _spawnedObjects.Add(instance);
                 _locations[5] = new Vector2d(ScenesData.treasureCoords[0], ScenesData.treasureCoords[1]);
+                _spawnedObjects[5] = instance;
+                
             }
         }
 
         private void Update()
         {
+            
             if (Input.GetMouseButtonUp(1))
             {
                 var mousePosScreen = Input.mousePosition;
@@ -67,31 +67,41 @@
                 {
                     _locations[5] = latlongDelta;
                     ScenesData.AddNewTreasureCord(latlongDelta);
-                    instance = Instantiate(markers[5]);
+                    if(_spawnedObjects[5] == null)
+                    {
+                        instance = Instantiate(markers[5]);
+                        _spawnedObjects[5] = instance;
+                    }
+                    
+                   
+
                 }
                 else
                 {
-                    ScenesData.AddNewRiddleCoords(latlongDelta);
                     _locations[ScenesData.currentRiddle - 1] = latlongDelta;
-                    instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
+                    ScenesData.AddNewRiddleCoords(latlongDelta);
+                    if(_spawnedObjects[ScenesData.currentRiddle - 1] == null)
+                    {
+                        instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
+                        _spawnedObjects[ScenesData.currentRiddle - 1] = instance;
+                    }  
                 }
-
-                _spawnedObjects.Add(instance);
-
                 if (ScenesData.treasForT == true)
                     SceneManager.LoadScene("Treasure");
                 else
                     SceneManager.LoadScene("Riddle");
             }
-            int count = _spawnedObjects.Count;
+            int count = _spawnedObjects.Length;
             for (int i = 0; i < count; i++)
             {
-                var spawnedObject = _spawnedObjects[i];
-                var location = _locations[i];
-                spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
-                spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+                if(_spawnedObjects[i] != null)
+                {
+                    var spawnedObject = _spawnedObjects[i];
+                    var location = _locations[i];
+                    spawnedObject.transform.localPosition = _map.GeoToWorldPosition(location, true);
+                    spawnedObject.transform.localScale = new Vector3(_spawnScale, _spawnScale, _spawnScale);
+                }  
             }
-
 
         }
     }
