@@ -112,7 +112,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
             if (PhotonNetwork.IsMasterClient)
             {
                 object[] content = new object[] { ScenesData.GetValidRiddlesCoords(), ScenesData.GetValidRiddlesText(), ScenesData.treasureCoords };
-                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All }; // You would have to set the Receivers to All in order to receive this event on the local client as well
+                RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 PhotonNetwork.RaiseEvent(1, content, raiseEventOptions, SendOptions.SendReliable);
             }
         }

@@ -32,6 +32,8 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
                 Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);            
             }
             Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);
+            GameObject.Find("ARLocalization").GetComponent<ARLocalization>().ReceivedGameCoordsAndTexts(riddlesCoords, treasureCoords, riddlesTexts);
         }
+        
     }
 }
