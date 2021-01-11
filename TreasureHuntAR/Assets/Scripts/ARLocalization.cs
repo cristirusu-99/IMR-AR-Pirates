@@ -9,34 +9,44 @@ public class ARLocalization : MonoBehaviour
     public double[] treasureCoords;
     public int[] foundRiddles;
     public string currentRiddleText;
-    public int currentRiddleNumber;
-
+    public int currentRiddleNumber = -1;
 
     IEnumerator Start()
     {
-        /* Input.location.Start();
+#if UNITY_EDITOR
+        yield return null;
 
-         int maxWait = 20;
-         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
-         {
-             yield return new WaitForSeconds(1);
-             maxWait--;
-         }
-         if (maxWait < 1)
-         {
-             print("Timed out");
-             yield break;
-         }*/
-        return null;
+#elif UNITY_ANDROID
+        Input.location.Start();
+
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        {
+            yield return new WaitForSeconds(1);
+            maxWait--;
+        }
+        if (maxWait < 1)
+        {
+            print("Timed out");
+            yield break;
+        }
+#endif
     }
+
+
 
     void Update()
     {
         if(riddlesCoords != null)
         {
-            //CalculateDistanceBetweenUserAndRiddles();
+#if UNITY_EDITOR
+            int i = 0;
+#elif UNITY_ANDROID
+            CalculateDistanceBetweenUserAndRiddles();
+#endif
+
         }
-        
+
     }
 
     public void ReceivedGameCoordsAndTexts(double[] receivedRiddlesCoords, double[] receivedTreasureCoords, string[] receivedRiddlesTexts) 
@@ -45,6 +55,10 @@ public class ARLocalization : MonoBehaviour
         riddlesTexts = new string[receivedRiddlesTexts.Length];
         treasureCoords = new double[receivedTreasureCoords.Length];
         foundRiddles = new int[receivedRiddlesTexts.Length];
+        for(int i = 0; i < foundRiddles.Length; i++)
+        {
+            foundRiddles[i] = 0;
+        }
         currentRiddleText = "";
         receivedRiddlesCoords.CopyTo(riddlesCoords, 0);
         receivedTreasureCoords.CopyTo(treasureCoords, 0);

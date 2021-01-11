@@ -26,11 +26,13 @@ public class SpawnRiddle : MonoBehaviour
         {
             string currentRiddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
             int currentRiddleNumber = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleNumber;
-            if (currentRiddleText != null && currentRiddleText != "" && currentRiddleNumber != 0)
+            int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
+            if (currentRiddleText != null && currentRiddleText != "" && currentRiddleNumber != -1)
             {
                 if(GameObject.Find("DebugText1").GetComponent<Text>().text == "")
                 {
                     GameObject.Find("DebugText1").GetComponent<Text>().text = currentRiddleText;
+                    GameObject.Find("DebugText2").GetComponent<Text>().text = foundRiddles[0].ToString();
                 }
                 if(GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
                 {

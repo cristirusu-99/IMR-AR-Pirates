@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MagicShowOrHide : MonoBehaviour
 {
@@ -9,20 +10,32 @@ public class MagicShowOrHide : MonoBehaviour
     bool ok=true;
      public void ShowOrHide()
     {
-        if (ok == false)
+        if (ok == true)
             Show();
         else
             Hide();
         
     }
-    public void Show()
+    public void Hide()
     {
+        Debug.Log("Marian");
         makeitGONE.SetActive(false);
         ok = true;
     }
-    public void Hide()
+    public void Show()
     {
+        Debug.Log("Gigi");
         makeitGONE.SetActive(true);
+        int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
+        string[] riddlesTexts = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().riddlesTexts;
+        for (int i = 0; i < foundRiddles.Length; i++)
+        {
+
+            if (foundRiddles[i] == 1)
+             {
+                GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
+             }
+        }
         ok = false;
     }
 }
