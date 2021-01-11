@@ -48,9 +48,12 @@ public class ARLocalization : MonoBehaviour
         receivedRiddlesCoords.CopyTo(riddlesCoords, 0);
         receivedTreasureCoords.CopyTo(treasureCoords, 0);
         receivedRiddlesTexts.CopyTo(riddlesTexts, 0);
-        Debug.Log("Riddle coords: " + riddlesCoords.ToString());
-        Debug.Log("Riddle texts: " + riddlesTexts.ToString());
-        Debug.Log("Treasure coords: " + treasureCoords.ToString());
+        for (int i = 0, j = 0; i < riddlesTexts.Length; i++, j += 2)
+        {
+            Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
+            Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);
+        }
+        Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);
     }
 
     public void CalculateDistanceBetweenUserAndRiddles()
@@ -59,7 +62,8 @@ public class ARLocalization : MonoBehaviour
         bool nearRiddle = false;
         for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
-            if(DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]) < 20)
+            double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
+            if (distanceInMetres < 20)
             {
                 if(foundRiddles[j] == 1)
                 {

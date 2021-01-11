@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -23,11 +24,15 @@ public class SpawnRiddle : MonoBehaviour
 
         if (placementPoseIsValid)
         {
-            if(GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText != "")
+            string riddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
+            if (riddleText != null && riddleText != "" )
             {
+                if(GameObject.Find("DebugText1").GetComponent<Text>().text == "")
+                {
+                    GameObject.Find("DebugText1").GetComponent<Text>().text = riddleText;
+                }
                 PlaceObject();
-            }
-            
+            }     
         }
     }
 
