@@ -7,6 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 public class SpawnRiddle : MonoBehaviour
 {
     public GameObject objectToPlace;
+    public GameObject treasure;
     public GameObject placementIndicator;
     private ARRaycastManager aRRaycastManager;
     private Pose placementPose;
@@ -27,6 +28,7 @@ public class SpawnRiddle : MonoBehaviour
             string currentRiddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
             int currentRiddleNumber = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleNumber;
             int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
+            bool treasureFound = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().treasureFound;
             if (currentRiddleText != null && currentRiddleText != "" && currentRiddleNumber != -1)
             {
                 if(GameObject.Find("DebugText1").GetComponent<Text>().text == "")
@@ -38,15 +40,30 @@ public class SpawnRiddle : MonoBehaviour
                 {
                     PlaceObject(currentRiddleNumber);
                 }        
-            }     
+            }
+            if(treasureFound)
+            {
+                if (GameObject.Find("Treasure") == null)
+                {
+                    PlaceTreasure();
+                }
+            }
         }
+    }
+
+    private void PlaceTreasure()
+    {
+        Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
+        Vector3 objectRotation = new Vector3(1, 1, 1);
+        GameObject instance = Instantiate(treasure, objectPosition, Quaternion.identity);
+        instance.name = "Treasure";
     }
 
     private void PlaceObject(int currentRiddleNumber)
     {
             Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
             Vector3 objectRotation = new Vector3(1, 1, 1);
-            GameObject instance = Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
+            GameObject instance = Instantiate(objectToPlace, objectPosition, Quaternion.identity);
             instance.name = "RiddleObject" + currentRiddleNumber;
 
             /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/

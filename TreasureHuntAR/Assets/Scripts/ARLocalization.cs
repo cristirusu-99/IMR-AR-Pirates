@@ -9,6 +9,7 @@ public class ARLocalization : MonoBehaviour
     public double[] treasureCoords;
     public int[] foundRiddles;
     public string currentRiddleText;
+    public bool treasureFound = false;
     public int currentRiddleNumber = -1;
 
     IEnumerator Start()
@@ -88,9 +89,14 @@ public class ARLocalization : MonoBehaviour
             }
 
         }
-        if(nearRiddle == false)
+        if (nearRiddle == false)
         {
             currentRiddleText = "";
+        }
+        double distanceInMetresTreasure = DistanceInMetres(userLocation[0], userLocation[1], treasureCoords[0], treasureCoords[1]);
+        if(distanceInMetresTreasure < 20)
+        {
+            treasureFound = true;
         }
     }
 
