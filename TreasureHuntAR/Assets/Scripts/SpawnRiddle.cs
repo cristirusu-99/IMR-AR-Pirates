@@ -24,23 +24,29 @@ public class SpawnRiddle : MonoBehaviour
 
         if (placementPoseIsValid)
         {
-            string riddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
-            if (riddleText != null && riddleText != "" )
+            string currentRiddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
+            int currentRiddleNumber = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleNumber;
+            if (currentRiddleText != null && currentRiddleText != "" && currentRiddleNumber != 0)
             {
                 if(GameObject.Find("DebugText1").GetComponent<Text>().text == "")
                 {
-                    GameObject.Find("DebugText1").GetComponent<Text>().text = riddleText;
+                    GameObject.Find("DebugText1").GetComponent<Text>().text = currentRiddleText;
                 }
-                PlaceObject();
+                if(GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
+                {
+                    PlaceObject(currentRiddleNumber);
+                }        
             }     
         }
     }
 
-    private void PlaceObject()
+    private void PlaceObject(int currentRiddleNumber)
     {
             Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
             Vector3 objectRotation = new Vector3(1, 1, 1);
-            Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
+            GameObject instance = Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
+            instance.name = "RiddleObject" + currentRiddleNumber;
+
             /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/
     }
 

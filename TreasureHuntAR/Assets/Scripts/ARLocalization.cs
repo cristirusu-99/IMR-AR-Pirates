@@ -9,6 +9,7 @@ public class ARLocalization : MonoBehaviour
     public double[] treasureCoords;
     public int[] foundRiddles;
     public string currentRiddleText;
+    public int currentRiddleNumber;
 
 
     IEnumerator Start()
@@ -60,23 +61,16 @@ public class ARLocalization : MonoBehaviour
     {
         double[] userLocation = GetCurrentLocation();
         bool nearRiddle = false;
+        currentRiddleNumber = 0;
         for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
             double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
             if (distanceInMetres < 20)
             {
-                if(foundRiddles[j] == 1)
-                {
-                    continue;
-                } 
-                else
-                {
-                    foundRiddles[j] = 1;
-                    currentRiddleText = riddlesTexts[j];
-                    nearRiddle = true;
-                    break;
-                }
-                
+                foundRiddles[j] = 1;
+                currentRiddleText = riddlesTexts[j];
+                currentRiddleNumber = j;
+                nearRiddle = true;
             }
 
         }
