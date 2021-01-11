@@ -21,22 +21,22 @@ public class SpawnRiddle : MonoBehaviour
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
-        if (placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (placementPoseIsValid)
         {
-            PlaceObject();
+            if(GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText != "")
+            {
+                PlaceObject();
+            }
+            
         }
     }
 
     private void PlaceObject()
     {
-        if(GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText != "")
-        {
             Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
             Vector3 objectRotation = new Vector3(1, 1, 1);
             Instantiate(objectToPlace, objectPosition, Quaternion.Euler(objectRotation));
             /*Instantiate(objectToPlace, placementPose.position, placementPose.rotation);*/
-        }
-
     }
 
     private void UpdatePlacementIndicator()

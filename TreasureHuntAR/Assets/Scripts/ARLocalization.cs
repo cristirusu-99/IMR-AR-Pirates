@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class ARLocalization : MonoBehaviour
@@ -9,11 +10,30 @@ public class ARLocalization : MonoBehaviour
     public int[] foundRiddles;
     public string currentRiddleText;
 
+
+    IEnumerator Start()
+    {
+        /* Input.location.Start();
+
+         int maxWait = 20;
+         while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+         {
+             yield return new WaitForSeconds(1);
+             maxWait--;
+         }
+         if (maxWait < 1)
+         {
+             print("Timed out");
+             yield break;
+         }*/
+        return null;
+    }
+
     void Update()
     {
         if(riddlesCoords != null)
         {
-            CalculateDistanceBetweenUserAndRiddles();
+            //CalculateDistanceBetweenUserAndRiddles();
         }
         
     }
@@ -28,15 +48,15 @@ public class ARLocalization : MonoBehaviour
         receivedRiddlesCoords.CopyTo(riddlesCoords, 0);
         receivedTreasureCoords.CopyTo(treasureCoords, 0);
         receivedRiddlesTexts.CopyTo(riddlesTexts, 0);
-        Debug.Log(riddlesCoords.ToString());
-        Debug.Log(riddlesTexts.ToString());
-        Debug.Log(treasureCoords.ToString());
+        Debug.Log("Riddle coords: " + riddlesCoords.ToString());
+        Debug.Log("Riddle texts: " + riddlesTexts.ToString());
+        Debug.Log("Treasure coords: " + treasureCoords.ToString());
     }
 
     public void CalculateDistanceBetweenUserAndRiddles()
     {
         double[] userLocation = GetCurrentLocation();
-        currentRiddleText = "";
+        bool nearRiddle = false;
         for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
             if(DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]) < 20)
@@ -49,10 +69,16 @@ public class ARLocalization : MonoBehaviour
                 {
                     foundRiddles[j] = 1;
                     currentRiddleText = riddlesTexts[j];
+                    nearRiddle = true;
                     break;
                 }
+                
             }
 
+        }
+        if(nearRiddle == false)
+        {
+            currentRiddleText = "";
         }
     }
 
@@ -70,12 +96,12 @@ public class ARLocalization : MonoBehaviour
         double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
         double d = R * c; // in metres
-
         return d;
     }
 
     double[] GetCurrentLocation()
     {
+
         if (Input.location.status == LocationServiceStatus.Failed)
         {
             print("Unable to determine device location");
