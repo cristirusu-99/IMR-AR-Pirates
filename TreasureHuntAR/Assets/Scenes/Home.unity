@@ -2859,7 +2859,7 @@ GameObject:
   - component: {fileID: 1136399881}
   - component: {fileID: 1136399880}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: toTreasure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3232,7 +3232,7 @@ GameObject:
   - component: {fileID: 1250026804}
   - component: {fileID: 1250026803}
   m_Layer: 0
-  m_Name: toRidd
+  m_Name: toRiddles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5293,8 +5293,6 @@ GameObject:
   - component: {fileID: 2089187553}
   - component: {fileID: 2089187552}
   - component: {fileID: 2089187551}
-  - component: {fileID: 2089187557}
-  - component: {fileID: 2089187558}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5424,30 +5422,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2089187557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089187550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c9a1406c4873aa488729e6ff68f2177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2089187558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089187550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a54c39a36e48ab41ac31eb0f1af05e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2138978229
 GameObject:
   m_ObjectHideFlags: 0

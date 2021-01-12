@@ -8,6 +8,7 @@ using Photon.Realtime;
 using System.Linq;
 using System.Globalization;
 using ExitGames.Client.Photon;
+using UnityEngine.SceneManagement;
 
 public class PhotonConnection : MonoBehaviourPunCallbacks
 {
@@ -89,6 +90,12 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
        
     }
 
+    public void DisconnectFromRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+
+    }
+
     public void JoinRoom()
     {
         InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
@@ -103,6 +110,18 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         }
     }
     #region MonoBehaviourPunCallbacks Callbacks
+
+
+    public override void OnLeftRoom()
+    {
+        base.OnLeftRoom();
+        SceneManager.LoadScene("Home");
+        ScenesData.currentRiddle = 1;
+        ScenesData.numberOfRiddles = 1;
+        ScenesData.treasureCoords = new double[2];
+        ScenesData.riddlesCoords = new double[10];
+        ScenesData.riddlesText = new string[6];
+}
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -137,10 +156,10 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+        ScenesData.backToLobby = true;
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("ARScene");
-            ScenesData.backToLobby = true;
         }
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         #endregion

@@ -67,10 +67,10 @@ public class ARLocalization : MonoBehaviour
         receivedRiddlesTexts.CopyTo(riddlesTexts, 0);
         for (int i = 0, j = 0; i < riddlesTexts.Length; i++, j += 2)
         {
-            Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
-            Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);
+           /* Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
+            Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);*/
         }
-        Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);
+        /*Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);*/
     }
 
     public void CalculateDistanceBetweenUserAndRiddles()

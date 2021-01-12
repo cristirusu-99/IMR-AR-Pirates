@@ -10,6 +10,8 @@ public class SpawnRiddle : MonoBehaviour
     public GameObject treasure;
     public GameObject placementIndicator;
     public GameObject treasureObject;
+    private float timeToAppear = 3f;
+    private float timeWhenDisappear = 0;
     private ARRaycastManager aRRaycastManager;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
@@ -46,8 +48,16 @@ public class SpawnRiddle : MonoBehaviour
             {
                 if (GameObject.Find("Treasure") == null)
                 {
+                    timeWhenDisappear = Time.time + timeToAppear;
                     treasureObject.SetActive(true);
                     PlaceTreasure();
+                }
+                else
+                {
+                    if(Time.time >= timeWhenDisappear)
+                    {
+                        treasureObject.SetActive(false);
+                    }
                 }
             }
         }

@@ -14,6 +14,7 @@ public class Verify : MonoBehaviour
             Resources.FindObjectsOfTypeAll<GameObject>()
                         .FirstOrDefault(g => g.name == "PlayAs")
                         .SetActive(true);
+            ScenesData.backToLobby = false;
         }
         if (ScenesData.nicknameIntroduced == true)
         {

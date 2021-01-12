@@ -18,13 +18,11 @@ public class MagicShowOrHide : MonoBehaviour
     }
     public void Hide()
     {
-        Debug.Log("Marian");
         makeitGONE.SetActive(false);
         ok = true;
     }
     public void Show()
     {
-        Debug.Log("Gigi");
         makeitGONE.SetActive(true);
         if(makeitGONE.name == "RiddlesFound")
         {
