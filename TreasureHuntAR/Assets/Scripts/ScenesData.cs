@@ -11,7 +11,7 @@ public class ScenesData
     public static int numberOfRiddles = 1;
     public static double[] treasureCoords = new double[2];
     public static bool treasForT = false;
-
+    public static bool backToLobby = false;
     public static void AddNewRiddleCoords(Vector2d latLong)
     {
         riddlesCoords[2 * (currentRiddle - 1)] = latLong.x;

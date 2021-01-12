@@ -32,6 +32,7 @@ public class ARLocalization : MonoBehaviour
             yield break;
         }
 #endif
+        ScenesData.nicknameIntroduced = false;
     }
 
 

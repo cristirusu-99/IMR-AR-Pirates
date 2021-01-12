@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
+
 public class Verify : MonoBehaviour
 {
 
      void Start()
     {
+        if (ScenesData.backToLobby == true)
+        {
+            GameObject.Find("MainMenu").SetActive(false);
+            Resources.FindObjectsOfTypeAll<GameObject>()
+                        .FirstOrDefault(g => g.name == "PlayAs")
+                        .SetActive(true);
+        }
         if (ScenesData.nicknameIntroduced == true)
         {
             GameObject.Find("MainMenu").SetActive(false);
@@ -13,6 +22,17 @@ public class Verify : MonoBehaviour
                         .FirstOrDefault(g => g.name == "Lobby")
                         .SetActive(true);
         }
+    }
+    public void ChangeToPlayAs()
+    {
+        /*if (ScenesData.backToLobby == true)
+        {
+            SceneManager.LoadScene("Home");
+            GameObject.Find("MainMenu").SetActive(false);
+            Resources.FindObjectsOfTypeAll<GameObject>()
+                        .FirstOrDefault(g => g.name == "PlayAs")
+                        .SetActive(true);
+        }*/
     }
 
     // Start is called before the first frame update
