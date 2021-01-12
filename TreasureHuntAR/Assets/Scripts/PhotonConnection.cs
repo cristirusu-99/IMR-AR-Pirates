@@ -140,6 +140,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.LoadLevel("ARScene");
+            ScenesData.backToLobby = true;
         }
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
         #endregion
