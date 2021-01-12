@@ -26,15 +26,18 @@ public class MagicShowOrHide : MonoBehaviour
     {
         Debug.Log("Gigi");
         makeitGONE.SetActive(true);
-        int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
-        string[] riddlesTexts = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().riddlesTexts;
-        for (int i = 0; i < foundRiddles.Length; i++)
+        if(makeitGONE.name == "RiddlesFound")
         {
+            int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
+            string[] riddlesTexts = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().riddlesTexts;
+            for (int i = 0; i < foundRiddles.Length; i++)
+            {
 
-            if (foundRiddles[i] == 1)
-             {
-                GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
-             }
+                if (foundRiddles[i] == 1)
+                {
+                    GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
+                }
+            }
         }
         ok = false;
     }

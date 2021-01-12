@@ -9,6 +9,7 @@ public class SpawnRiddle : MonoBehaviour
     public GameObject objectToPlace;
     public GameObject treasure;
     public GameObject placementIndicator;
+    public GameObject treasureObject;
     private ARRaycastManager aRRaycastManager;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
@@ -45,6 +46,7 @@ public class SpawnRiddle : MonoBehaviour
             {
                 if (GameObject.Find("Treasure") == null)
                 {
+                    treasureObject.SetActive(true);
                     PlaceTreasure();
                 }
             }
@@ -53,7 +55,7 @@ public class SpawnRiddle : MonoBehaviour
 
     private void PlaceTreasure()
     {
-        Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y + 1, placementPose.position.z);
+        Vector3 objectPosition = new Vector3(placementPose.position.x, placementPose.position.y, placementPose.position.z);
         Vector3 objectRotation = new Vector3(1, 1, 1);
         GameObject instance = Instantiate(treasure, objectPosition, Quaternion.identity);
         instance.name = "Treasure";
