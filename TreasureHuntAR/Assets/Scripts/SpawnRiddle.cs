@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
@@ -30,19 +31,57 @@ public class SpawnRiddle : MonoBehaviour
         {
             string currentRiddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
             int currentRiddleNumber = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleNumber;
+            double[] riddlesCoords = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().riddlesCoords;
             int[] foundRiddles = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().foundRiddles;
             bool treasureFound = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().treasureFound;
-            if (currentRiddleText != null && currentRiddleText != "" && currentRiddleNumber != -1)
+            if (currentRiddleText != null && currentRiddleText != "")
             {
-                if(GameObject.Find("DebugText1").GetComponent<Text>().text == "")
+                double[] currentLocation = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().GetCurrentLocation();
+                float bearing = (float)GameObject.Find("ARLocalization").GetComponent<ARLocalization>().CalculateBearingInDegreesBetweenTwoCoords(currentLocation[0], currentLocation[1], riddlesCoords[2 * currentRiddleNumber], riddlesCoords[2 * currentRiddleNumber + 1]);
+                float degrees = GameObject.Find("ARLocalization").GetComponent<CompassBehaviour>().degrees;
+                if (GameObject.Find("DebugText1").GetComponent<Text>().text == "")
                 {
                     GameObject.Find("DebugText1").GetComponent<Text>().text = currentRiddleText;
-                    GameObject.Find("DebugText2").GetComponent<Text>().text = foundRiddles[0].ToString();
+                   
                 }
-                if(GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
+                if (bearing > degrees)
                 {
-                    PlaceObject(currentRiddleNumber);
-                }        
+                    
+                }
+                else
+                {
+                    GameObject.Find("DebugText2").GetComponent<Text>().text = Math.Min(degrees - bearing, 360 - degrees + bearing).ToString();
+                }
+                if (bearing > degrees)
+                {
+                    if (Math.Min(bearing - degrees, 360 - bearing + degrees) < 70)
+                    {
+                        //GameObject.Find("DebugText2").GetComponent<Text>().text = Math.Min(bearing - degrees, 360 - bearing + degrees).ToString();
+                        
+
+                        if (GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
+                        {
+                            GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
+                            PlaceObject(currentRiddleNumber);
+                        }
+
+                    }
+                }
+                else
+                {
+                    if (Math.Min(degrees - bearing, 360 - degrees + bearing) < 70)
+                    {
+
+ 
+                        if (GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
+                        {
+                            GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
+                            PlaceObject(currentRiddleNumber);
+                        }
+
+                    }
+                }
+               
             }
             if(treasureFound)
             {

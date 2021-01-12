@@ -94,7 +94,6 @@ public class ARLocalization : MonoBehaviour
     {
         double[] userLocation = GetCurrentLocation();
         bool nearRiddle = false;
-        currentRiddleNumber = 0;
         for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
             double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
@@ -118,6 +117,16 @@ public class ARLocalization : MonoBehaviour
         }
     }
 
+    public double CalculateBearingInDegreesBetweenTwoCoords(double lat1, double lon1, double lat2, double lon2)
+    {
+        double y = Math.Sin(lon2 - lon1) * Math.Cos(lat2);
+        double x = Math.Cos(lat1) * Math.Sin(lat2) -
+                  Math.Sin(lat1) * Math.Cos(lat2) * Math.Cos(lon2 - lon1);
+        double θ = Math.Atan2(y, x);
+        double brng = (θ * 180 / Math.PI + 360) % 360;
+        return brng;
+    }
+
     public double DistanceInMetres(double lat1, double lon1, double lat2, double lon2)
     {
         double R = 6371e3; // metres
@@ -135,7 +144,7 @@ public class ARLocalization : MonoBehaviour
         return d;
     }
 
-    double[] GetCurrentLocation()
+    public double[] GetCurrentLocation()
     {
 
         if (Input.location.status == LocationServiceStatus.Failed)

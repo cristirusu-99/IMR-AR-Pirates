@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class CompassBehaviour : MonoBehaviour { 
     public string headingDegrees; 
-    public string headingBearing; 
+    public string headingBearing;
+    public float degrees;
     private bool startTracking = false; 
     void Start() 
     { 
@@ -22,9 +23,10 @@ public class CompassBehaviour : MonoBehaviour {
     {
         if (startTracking)
         {
+            degrees = Input.compass.trueHeading;
             transform.rotation = Quaternion.Euler(0, Input.compass.trueHeading, 0);
-            headingDegrees = ((int)Input.compass.trueHeading).ToString() + "° ";
-            headingBearing = DegreesToCardinalDetailed(Input.compass.trueHeading);
+            /*headingDegrees = ((int)degrees).ToString() + "° ";
+            headingBearing = DegreesToCardinalDetailed(degrees);
             if (!(GameObject.Find("DebugText1").GetComponent<Text>().text == headingDegrees))
             {
                 GameObject.Find("DebugText1").GetComponent<Text>().text = headingDegrees;
@@ -32,7 +34,7 @@ public class CompassBehaviour : MonoBehaviour {
             if (!(GameObject.Find("DebugText2").GetComponent<Text>().text == headingBearing))
             {
                 GameObject.Find("DebugText2").GetComponent<Text>().text = headingBearing;
-            }
+            }*/
 
         } 
     } 
