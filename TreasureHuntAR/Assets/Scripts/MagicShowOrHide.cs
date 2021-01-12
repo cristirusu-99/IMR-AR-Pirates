@@ -11,6 +11,7 @@ public class MagicShowOrHide : MonoBehaviour
     public Camera cam1;
     public Camera cam2;
     bool ok=true;
+    public Text textToChange;
      public void ShowOrHide()
     {
         if (ok == true)
@@ -68,6 +69,10 @@ public class MagicShowOrHide : MonoBehaviour
                     obj.SetActive(true);
                 }
             }
+        }
+        if(makeitGONE.name=="Code")
+        {
+            textToChange.text= string.Copy("The room code for this game is: " + ScenesData.roomCode);
         }
         ok = false;
     }

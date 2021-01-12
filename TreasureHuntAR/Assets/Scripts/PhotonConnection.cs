@@ -84,10 +84,23 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
-        Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
-        PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
-       
+        if(ScenesData.CheckNumberOfZerosRiddleCoordAndTreasure()==0)
+        {
+            Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
+            Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));
+            PhotonNetwork.CreateRoom(roomCode.text.Substring(roomCode.text.Length - 4, 4), new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+            ScenesData.roomCode = string.Copy(roomCode.text.Substring(roomCode.text.Length - 4, 4));
+        }
+        else
+        {
+            GameObject.Find("SetRiddles").SetActive(false);
+            GameObject.Find("Treasure Location").SetActive(false);
+            GameObject.Find("Button_start").SetActive(false);
+            Resources.FindObjectsOfTypeAll<GameObject>()
+                     .FirstOrDefault(g => g.name == "ErrorDisplay")
+                     .SetActive(true);
+
+        }
     }
 
     public void DisconnectFromRoom()
@@ -99,6 +112,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
     public void JoinRoom()
     {
         InputField roomCode = GameObject.Find("InputField").GetComponent<InputField>();
+        ScenesData.roomCode= string.Copy(roomCode.text.Substring(roomCode.text.Length - 4, 4));
         Debug.Log("Joining room with code: " + roomCode.text);
         bool joinable = PhotonNetwork.JoinRoom(roomCode.text);
         if (joinable == false)
