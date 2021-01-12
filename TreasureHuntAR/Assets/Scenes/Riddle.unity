@@ -490,8 +490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -209.98, y: -483.35}
-  m_SizeDelta: {x: 583.12256, y: 135.14539}
+  m_AnchoredPosition: {x: -141.3, y: -451.8}
+  m_SizeDelta: {x: 720.3828, y: 198.20172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404332274
 MonoBehaviour:
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_LineType: 1
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 999
+  m_CharacterLimit: 100
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
@@ -1228,6 +1228,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 923821081}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SaveRiddlesText, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1779,7 +1791,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 88
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1833,8 +1845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: -0.00013733}
-  m_SizeDelta: {x: 470.81876, y: 95.52043}
+  m_AnchoredPosition: {x: 46.339, y: 12.982}
+  m_SizeDelta: {x: 582.6605, y: 121.48497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370272572
 MonoBehaviour:
@@ -1858,7 +1870,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2246,8 +2258,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -254, y: 0}
-  m_SizeDelta: {x: 43.68366, y: 95.52054}
+  m_AnchoredPosition: {x: -277, y: 12.982}
+  m_SizeDelta: {x: 64.01851, y: 121.484955}
   m_Pivot: {x: 0.5000006, y: 0.5000001}
 --- !u!114 &1656981804
 MonoBehaviour:

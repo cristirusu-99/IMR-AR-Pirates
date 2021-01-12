@@ -11,6 +11,7 @@ public class MagicShowOrHide : MonoBehaviour
     public Camera cam1;
     public Camera cam2;
     bool ok=true;
+    public Text textToChange;
      public void ShowOrHide()
     {
         if (ok == true)
@@ -50,6 +51,7 @@ public class MagicShowOrHide : MonoBehaviour
                 if (foundRiddles[i] == 1)
                 {
                     GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
+                    GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().fontSize = 70;
                 }
             }
         }
@@ -67,6 +69,10 @@ public class MagicShowOrHide : MonoBehaviour
                     obj.SetActive(true);
                 }
             }
+        }
+        if(makeitGONE.name=="Code")
+        {
+            textToChange.text= string.Copy("The room code for this game is: " + ScenesData.roomCode);
         }
         ok = false;
     }

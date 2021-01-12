@@ -14,12 +14,28 @@ public class ScenesData
     public static bool backToLobby = false;
     public static double[] playersCoords = new double[8];
     public static double[] lastPlayersCoords = new double[8];
+    public static string roomCode="";
     public static void AddNewRiddleCoords(Vector2d latLong)
     {
         riddlesCoords[2 * (currentRiddle - 1)] = latLong.x;
         riddlesCoords[2 * (currentRiddle - 1) + 1] = latLong.y;
     }
-
+    public static int CheckNumberOfZerosRiddleCoordAndTreasure()
+    {
+        int nr = 0;
+        for(int i=0;i<10;i++)
+        {
+            if (riddlesCoords[i] == 0) nr++;
+        }
+        for(int i=0;i<2;i++)
+        {
+            if (treasureCoords[i] == 0) nr++;
+        }
+        if (nr == 12 || nr==10)
+            return 1;
+        else
+            return 0;
+    }
     public static void AddNewTreasureCord(Vector2d latLong)
     {
         
