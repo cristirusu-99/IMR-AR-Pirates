@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,6 +26,14 @@ public class MagicShowOrHide : MonoBehaviour
         {
             cam2.enabled = false;
             cam1.enabled = true;
+            for(int i = 0; i < 5; i++)
+            {
+                GameObject obj = GameObject.Find("Player" + i + "Location");
+                if(obj != null)
+                {
+                    obj.SetActive(false);
+                }
+            }
         }
         ok = true;
     }
@@ -48,6 +57,16 @@ public class MagicShowOrHide : MonoBehaviour
         {
             cam1.enabled = false;
             cam2.enabled = true;
+            for (int i = 0; i < 5; i++)
+            {
+                string objectToFind = "Player" + i + "Location";
+                GameObject obj = Resources.FindObjectsOfTypeAll<GameObject>()
+                     .FirstOrDefault(g => g.name == objectToFind);
+                if (obj != null)
+                {
+                    obj.SetActive(true);
+                }
+            }
         }
         ok = false;
     }

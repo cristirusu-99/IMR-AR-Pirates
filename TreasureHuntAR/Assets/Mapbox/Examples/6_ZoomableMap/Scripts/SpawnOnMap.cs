@@ -41,16 +41,25 @@
             {
                 for (int i = 0, j = 0; i < ScenesData.playersCoords.Length; i += 2, j++)
                 {
-                    if(ScenesData.playersCoords[i] != 0)
+                    if (ScenesData.playersCoords[i] != 0)
                     {
-                        instance = Instantiate(playerTarget);
-                        instance.transform.parent = gameObject.transform;
-                        instance.name = "Player" + j + "Location";
-                        _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
-                        _spawnedObjects[j] = instance;
+                        GameObject obj = GameObject.Find("Player" + j + "Location");
+                        if (obj == null)
+                        {
+                            instance = Instantiate(playerTarget);
+                            instance.name = "Player" + j + "Location";
+                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                            _spawnedObjects[j] = instance;
+                        } 
+                        else
+                        {
+                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                            _spawnedObjects[j] = obj;
+                        }
+                        
                     }
                 }
-            }  
+            }
             else
             {
                 for (int i = 0, j = 0; j < ScenesData.numberOfRiddles; i += 2, j++)
@@ -71,7 +80,7 @@
                     _spawnedObjects[5] = instance;
 
                 }
-            }    
+            }
         }
 
         void Update()
@@ -84,107 +93,113 @@
                 for (int i = 0, j = 0; i < ScenesData.playersCoords.Length; i += 2, j++)
                 {
 
-                    if (ScenesData.riddlesCoords[i] != 0)
+                    if (ScenesData.playersCoords[i] != 0)
                     {
-                        if (gameObject.transform.Find("Player" + j + "Location") != null)
+                        GameObject obj = GameObject.Find("Player" + j + "Location");
+                        if (obj == null)
                         {
-                            _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                            instance = Instantiate(playerTarget);
+                            instance.name = "Player" + j + "Location";
+                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                            _spawnedObjects[j] = instance;
                         }
                         else
                         {
-                            instance = Instantiate(playerTarget);
-                            instance.transform.parent = gameObject.transform;
-                            instance.name = "Player" + j + "Location";
-                            _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
-                            _spawnedObjects[j] = instance;
+                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                            _spawnedObjects[j] = obj;
                         }
+
                     }
                 }
             }
+            else
+            {
                 if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                switch (touch.phase)
                 {
-                    case TouchPhase.Began:
-                        startPos = touch.position;
-                        break;
-                    case TouchPhase.Moved:
-                        break;
+                    Touch touch = Input.GetTouch(0);
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began:
+                            startPos = touch.position;
+                            break;
+                        case TouchPhase.Moved:
+                            break;
 
-                    case TouchPhase.Ended:
-                        Vector2 touchPos = touch.position;
-                        if (touchPos == startPos)
+                        case TouchPhase.Ended:
+                            Vector2 touchPos = touch.position;
+                            if (touchPos == startPos)
+                            {
+                                startPos = new Vector2(0, 0);
+                                //assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
+                                //http://answers.unity3d.com/answers/599100/view.html
+                                var pos = _referenceCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _referenceCamera.transform.localPosition.y));
+                                var latlongDelta = _map.WorldToGeoPosition(pos);
+                                if (ScenesData.treasForT == true)
+                                {
+                                    _locations[5] = latlongDelta;
+                                    ScenesData.AddNewTreasureCord(latlongDelta);
+                                    if (_spawnedObjects[5] == null)
+                                    {
+                                        instance = Instantiate(markers[5]);
+                                        _spawnedObjects[5] = instance;
+                                    }
+                                }
+                                else
+                                {
+                                    _locations[ScenesData.currentRiddle - 1] = latlongDelta;
+                                    ScenesData.AddNewRiddleCoords(latlongDelta);
+                                    if (_spawnedObjects[ScenesData.currentRiddle - 1] == null)
+                                    {
+                                        instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
+                                        _spawnedObjects[ScenesData.currentRiddle - 1] = instance;
+                                    }
+                                }
+                                if (ScenesData.treasForT == true)
+                                    SceneManager.LoadScene("Treasure");
+                                else
+                                    SceneManager.LoadScene("Riddle");
+                            }
+                            break;
+                    }
+
+                }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    var mousePosScreen = Input.mousePosition;
+                    //assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
+                    //http://answers.unity3d.com/answers/599100/view.html
+                    mousePosScreen.z = _referenceCamera.transform.localPosition.y;
+                    var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
+                    var latlongDelta = _map.WorldToGeoPosition(pos);
+                    if (ScenesData.treasForT == true)
+                    {
+                        _locations[5] = latlongDelta;
+                        ScenesData.AddNewTreasureCord(latlongDelta);
+                        if (_spawnedObjects[5] == null)
                         {
-                            startPos = new Vector2(0, 0);
-                            //assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
-                            //http://answers.unity3d.com/answers/599100/view.html
-                            var pos = _referenceCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _referenceCamera.transform.localPosition.y));
-                            var latlongDelta = _map.WorldToGeoPosition(pos);
-                            if (ScenesData.treasForT == true)
-                            {
-                                _locations[5] = latlongDelta;
-                                ScenesData.AddNewTreasureCord(latlongDelta);
-                                if (_spawnedObjects[5] == null)
-                                {
-                                    instance = Instantiate(markers[5]);
-                                    _spawnedObjects[5] = instance;
-                                }
-                            }
-                            else
-                            {
-                                _locations[ScenesData.currentRiddle - 1] = latlongDelta;
-                                ScenesData.AddNewRiddleCoords(latlongDelta);
-                                if (_spawnedObjects[ScenesData.currentRiddle - 1] == null)
-                                {
-                                    instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
-                                    _spawnedObjects[ScenesData.currentRiddle - 1] = instance;
-                                }
-                            }
-                            if (ScenesData.treasForT == true)
-                                SceneManager.LoadScene("Treasure");
-                            else
-                                SceneManager.LoadScene("Riddle");
+                            instance = Instantiate(markers[5]);
+                            _spawnedObjects[5] = instance;
                         }
-                        break;
-                }
-
-            }
-            else if (Input.GetMouseButtonUp(1))
-            {
-                var mousePosScreen = Input.mousePosition;
-                //assign distance of camera to ground plane to z, otherwise ScreenToWorldPoint() will always return the position of the camera
-                //http://answers.unity3d.com/answers/599100/view.html
-                mousePosScreen.z = _referenceCamera.transform.localPosition.y;
-                var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
-                var latlongDelta = _map.WorldToGeoPosition(pos);
-                if (ScenesData.treasForT == true)
-                {
-                    _locations[5] = latlongDelta;
-                    ScenesData.AddNewTreasureCord(latlongDelta);
-                    if (_spawnedObjects[5] == null)
-                    {
-                        instance = Instantiate(markers[5]);
-                        _spawnedObjects[5] = instance;
                     }
-                }
-                else
-                {
-                    _locations[ScenesData.currentRiddle - 1] = latlongDelta;
-                    ScenesData.AddNewRiddleCoords(latlongDelta);
-                    if (_spawnedObjects[ScenesData.currentRiddle - 1] == null)
+                    else
                     {
-                        instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
-                        _spawnedObjects[ScenesData.currentRiddle - 1] = instance;
+                        _locations[ScenesData.currentRiddle - 1] = latlongDelta;
+                        ScenesData.AddNewRiddleCoords(latlongDelta);
+                        if (_spawnedObjects[ScenesData.currentRiddle - 1] == null)
+                        {
+                            instance = Instantiate(markers[ScenesData.currentRiddle - 1]);
+                            _spawnedObjects[ScenesData.currentRiddle - 1] = instance;
+                        }
                     }
+                    if (ScenesData.treasForT == true)
+                        SceneManager.LoadScene("Treasure");
+                    else
+                        SceneManager.LoadScene("Riddle");
+
+
                 }
-                if (ScenesData.treasForT == true)
-                    SceneManager.LoadScene("Treasure");
-                else
-                    SceneManager.LoadScene("Riddle");
-
-
             }
+
             int count = _spawnedObjects.Length;
             for (int i = 0; i < count; i++)
             {

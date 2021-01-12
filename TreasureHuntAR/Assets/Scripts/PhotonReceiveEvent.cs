@@ -41,6 +41,7 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
             double[] location = (double[])data[0];
             ScenesData.playersCoords[0] = location[0];
             ScenesData.playersCoords[1] = location[1];
+            //Debug.Log("Coord x1: " + ScenesData.playersCoords[0] + " Coord y1: " + ScenesData.playersCoords[1]);
 
         }
         if(eventCode == 2)
@@ -49,6 +50,7 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
             double[] location = (double[])data[0];
             ScenesData.playersCoords[2] = location[0];
             ScenesData.playersCoords[3] = location[1];
+            //Debug.Log("Coord x2: " + ScenesData.playersCoords[2] + " Coord y2: " + ScenesData.playersCoords[3]);
         }
         if(eventCode == 3)
         {
@@ -56,6 +58,7 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
             double[] location = (double[])data[0];
             ScenesData.playersCoords[4] = location[0];
             ScenesData.playersCoords[5] = location[1];
+            //Debug.Log("Coord x3: " + ScenesData.playersCoords[4] + " Coord y3: " + ScenesData.playersCoords[5]);
         }
         if(eventCode == 4)
         {
@@ -63,6 +66,7 @@ public class PhotonReceiveEvent : MonoBehaviour, IOnEventCallback
             double[] location = (double[])data[0];
             ScenesData.playersCoords[6] = location[0];
             ScenesData.playersCoords[7] = location[1];
+            //Debug.Log("Coord x4: " + ScenesData.playersCoords[6] + " Coord y4: " + ScenesData.playersCoords[7]);
         }
     }
 }

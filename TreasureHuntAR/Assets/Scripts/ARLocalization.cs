@@ -31,6 +31,20 @@ public class ARLocalization : MonoBehaviour
             print("Timed out");
             yield break;
         }
+#elif UNITY_IOS
+        Input.location.Start();
+
+        int maxWait = 20;
+        while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
+        {
+            yield return new WaitForSeconds(1);
+            maxWait--;
+        }
+        if (maxWait < 1)
+        {
+            print("Timed out");
+            yield break;
+        }
 #endif
         ScenesData.nicknameIntroduced = false;
     }
@@ -42,8 +56,10 @@ public class ARLocalization : MonoBehaviour
         if(riddlesCoords != null)
         {
 #if UNITY_EDITOR
-            int i = 0;
+            
 #elif UNITY_ANDROID
+            CalculateDistanceBetweenUserAndRiddles();
+#elif UNITY_IOS
             CalculateDistanceBetweenUserAndRiddles();
 #endif
 
