@@ -43,6 +43,7 @@
                 {
                     if (ScenesData.playersCoords[i] != 0)
                     {
+                        ScenesData.lastPlayersCoords[i] = ScenesData.playersCoords[i];
                         GameObject obj = GameObject.Find("Player" + j + "Location");
                         if (obj == null)
                         {
@@ -95,19 +96,24 @@
 
                     if (ScenesData.playersCoords[i] != 0)
                     {
-                        GameObject obj = GameObject.Find("Player" + j + "Location");
-                        if (obj == null)
+                        if(ScenesData.playersCoords[i] != ScenesData.lastPlayersCoords[i])
                         {
-                            instance = Instantiate(playerTarget);
-                            instance.name = "Player" + j + "Location";
-                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
-                            _spawnedObjects[j] = instance;
+                            ScenesData.lastPlayersCoords[i] = ScenesData.playersCoords[i];
+                            GameObject obj = GameObject.Find("Player" + j + "Location");
+                            if (obj == null)
+                            {
+                                instance = Instantiate(playerTarget);
+                                instance.name = "Player" + j + "Location";
+                                _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                                _spawnedObjects[j] = instance;
+                            }
+                            else
+                            {
+                                _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                                _spawnedObjects[j] = obj;
+                            }
                         }
-                        else
-                        {
-                            _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
-                            _spawnedObjects[j] = obj;
-                        }
+                        
 
                     }
                 }

@@ -13,6 +13,7 @@ public class ScenesData
     public static bool treasForT = false;
     public static bool backToLobby = false;
     public static double[] playersCoords = new double[8];
+    public static double[] lastPlayersCoords = new double[8];
     public static void AddNewRiddleCoords(Vector2d latLong)
     {
         riddlesCoords[2 * (currentRiddle - 1)] = latLong.x;
