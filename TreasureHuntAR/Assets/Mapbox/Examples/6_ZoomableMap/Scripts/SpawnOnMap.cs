@@ -28,36 +28,80 @@
         public Vector2 startPos;
         public Vector2 currentPos;
         public Vector2 endPos;
+        public GameObject playerTarget;
 
         void Start()
         {
             _locations = new Vector2d[markers.Length];
             _spawnedObjects = new GameObject[6];
             GameObject instance;
-            for (int i = 0, j = 0; j < ScenesData.numberOfRiddles; i += 2, j++)
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            if (sceneName == "ARScene")
             {
-                if (ScenesData.riddlesCoords[i] != 0)
+                for (int i = 0, j = 0; i < ScenesData.playersCoords.Length; i += 2, j++)
                 {
-                    instance = Instantiate(markers[j]);
-                    _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
-                    _spawnedObjects[j] = instance;
+                    if(ScenesData.playersCoords[i] != 0)
+                    {
+                        instance = Instantiate(playerTarget);
+                        instance.transform.parent = gameObject.transform;
+                        instance.name = "Player" + j + "Location";
+                        _locations[j] = new Vector2d(ScenesData.playersCoords[i], ScenesData.playersCoords[i + 1]);
+                        _spawnedObjects[j] = instance;
+                    }
+                }
+            }  
+            else
+            {
+                for (int i = 0, j = 0; j < ScenesData.numberOfRiddles; i += 2, j++)
+                {
+                    if (ScenesData.riddlesCoords[i] != 0)
+                    {
+                        instance = Instantiate(markers[j]);
+                        _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                        _spawnedObjects[j] = instance;
+
+                    }
+                }
+
+                if (ScenesData.treasureCoords[0] != 0)
+                {
+                    instance = Instantiate(markers[5]);
+                    _locations[5] = new Vector2d(ScenesData.treasureCoords[0], ScenesData.treasureCoords[1]);
+                    _spawnedObjects[5] = instance;
 
                 }
-            }
-
-            if (ScenesData.treasureCoords[0] != 0)
-            {
-                instance = Instantiate(markers[5]);
-                _locations[5] = new Vector2d(ScenesData.treasureCoords[0], ScenesData.treasureCoords[1]);
-                _spawnedObjects[5] = instance;
-
-            }
+            }    
         }
 
         void Update()
         {
+            GameObject instance;
+            Scene currentScene = SceneManager.GetActiveScene();
+            string sceneName = currentScene.name;
+            if (sceneName == "ARScene")
+            {
+                for (int i = 0, j = 0; i < ScenesData.playersCoords.Length; i += 2, j++)
+                {
 
-            if (Input.touchCount > 0)
+                    if (ScenesData.riddlesCoords[i] != 0)
+                    {
+                        if (gameObject.transform.Find("Player" + j + "Location") != null)
+                        {
+                            _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                        }
+                        else
+                        {
+                            instance = Instantiate(playerTarget);
+                            instance.transform.parent = gameObject.transform;
+                            instance.name = "Player" + j + "Location";
+                            _locations[j] = new Vector2d(ScenesData.riddlesCoords[i], ScenesData.riddlesCoords[i + 1]);
+                            _spawnedObjects[j] = instance;
+                        }
+                    }
+                }
+            }
+                if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase)
@@ -77,7 +121,6 @@
                             //http://answers.unity3d.com/answers/599100/view.html
                             var pos = _referenceCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _referenceCamera.transform.localPosition.y));
                             var latlongDelta = _map.WorldToGeoPosition(pos);
-                            GameObject instance;
                             if (ScenesData.treasForT == true)
                             {
                                 _locations[5] = latlongDelta;
@@ -115,7 +158,6 @@
                 mousePosScreen.z = _referenceCamera.transform.localPosition.y;
                 var pos = _referenceCamera.ScreenToWorldPoint(mousePosScreen);
                 var latlongDelta = _map.WorldToGeoPosition(pos);
-                GameObject instance;
                 if (ScenesData.treasForT == true)
                 {
                     _locations[5] = latlongDelta;

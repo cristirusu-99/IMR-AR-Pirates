@@ -130,9 +130,14 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                PhotonSendEvent.SendHintsAndBoardLatAndLong();       
+                PhotonSendEvent.SendHintsAndBoardLatAndLong(PhotonNetwork.CurrentRoom.PlayerCount);       
             }
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
     }
 
     public override void OnConnectedToMaster()
@@ -159,6 +164,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
         ScenesData.backToLobby = true;
         if (PhotonNetwork.IsMasterClient)
         {
+            ScenesData.playerNumber = 1;
             PhotonNetwork.LoadLevel("ARScene");
         }
         Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");

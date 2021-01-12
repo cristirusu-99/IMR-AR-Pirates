@@ -5,17 +5,17 @@ using Photon.Pun;
 
 public class PhotonSendEvent
 {
-    public static void SendHintsAndBoardLatAndLong()
+    public static void SendHintsAndBoardLatAndLong(byte playerCount)
     {
-        object[] content = new object[] { ScenesData.GetValidRiddlesCoords(), ScenesData.GetValidRiddlesText(), ScenesData.treasureCoords };
+        object[] content = new object[] { ScenesData.GetValidRiddlesCoords(), ScenesData.GetValidRiddlesText(), ScenesData.treasureCoords, playerCount };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(1, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(10, content, raiseEventOptions, SendOptions.SendReliable);
     }
 
     public static void SendCurrentUserLocation(double[] location)
     {
         object[] content = new object[] { location };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
-        PhotonNetwork.RaiseEvent(2, content, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(ScenesData.playerNumber, content, raiseEventOptions, SendOptions.SendReliable);
     }
 }

@@ -397,6 +397,9 @@ MonoBehaviour:
   - {fileID: 4371189015009565388, guid: 05fb8aebc728ca0409e906e6e111e3d0, type: 3}
   - {fileID: 4371189015009565388, guid: ace7cfc8aeb3cb241bbeb69a01d8bdc1, type: 3}
   _referenceCamera: {fileID: 1158509740}
+  startPos: {x: 0, y: 0}
+  currentPos: {x: 0, y: 0}
+  endPos: {x: 0, y: 0}
 --- !u!114 &1950008368
 MonoBehaviour:
   m_ObjectHideFlags: 0

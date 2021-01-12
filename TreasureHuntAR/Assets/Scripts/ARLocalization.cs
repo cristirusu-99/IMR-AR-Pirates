@@ -51,12 +51,13 @@ public class ARLocalization : MonoBehaviour
 
     }
 
-    public void ReceivedGameCoordsAndTexts(double[] receivedRiddlesCoords, double[] receivedTreasureCoords, string[] receivedRiddlesTexts) 
+    public void ReceivedGameCoordsAndTexts(double[] receivedRiddlesCoords, double[] receivedTreasureCoords, string[] receivedRiddlesTexts, byte playerNumber) 
     {
         riddlesCoords = new double[receivedRiddlesCoords.Length];
         riddlesTexts = new string[receivedRiddlesTexts.Length];
         treasureCoords = new double[receivedTreasureCoords.Length];
         foundRiddles = new int[receivedRiddlesTexts.Length];
+        ScenesData.playerNumber = playerNumber;
         for(int i = 0; i < foundRiddles.Length; i++)
         {
             foundRiddles[i] = 0;

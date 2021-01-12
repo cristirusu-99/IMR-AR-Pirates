@@ -6,11 +6,13 @@ public class ScenesData
     public static double[] riddlesCoords = new double[10];   // first value is first riddle x coordinate and second value y coordinate and so on
     public static string[] riddlesText = new string[6];      // first riddle starts at position 1 for conventional purposes
     public static bool nicknameIntroduced = false;
+    public static byte playerNumber;
     public static int currentRiddle = 1;
     public static int numberOfRiddles = 1;
     public static double[] treasureCoords = new double[2];
     public static bool treasForT = false;
     public static bool backToLobby = false;
+    public static double[] playersCoords = new double[8];
     public static void AddNewRiddleCoords(Vector2d latLong)
     {
         riddlesCoords[2 * (currentRiddle - 1)] = latLong.x;

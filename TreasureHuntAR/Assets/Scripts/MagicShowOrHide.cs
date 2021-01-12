@@ -7,6 +7,8 @@ public class MagicShowOrHide : MonoBehaviour
 {
     
     public GameObject makeitGONE;
+    public Camera cam1;
+    public Camera cam2;
     bool ok=true;
      public void ShowOrHide()
     {
@@ -19,6 +21,11 @@ public class MagicShowOrHide : MonoBehaviour
     public void Hide()
     {
         makeitGONE.SetActive(false);
+        if(makeitGONE.name == "LocationMap")
+        {
+            cam2.enabled = false;
+            cam1.enabled = true;
+        }
         ok = true;
     }
     public void Show()
@@ -36,6 +43,11 @@ public class MagicShowOrHide : MonoBehaviour
                     GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
                 }
             }
+        }
+        if(makeitGONE.name == "LocationMap")
+        {
+            cam1.enabled = false;
+            cam2.enabled = true;
         }
         ok = false;
     }
