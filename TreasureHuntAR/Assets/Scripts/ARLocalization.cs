@@ -74,23 +74,23 @@ public class ARLocalization : MonoBehaviour
         riddlesCoords = new double[receivedRiddlesCoords.Length];
         riddlesTexts = new string[receivedRiddlesTexts.Length];
         treasureCoords = new double[receivedTreasureCoords.Length];
-        foundRiddles = new int[receivedRiddlesTexts.Length];
-        ScenesData.playerNumber = playerNumber;
-        for(int i = 0; i < foundRiddles.Length; i++)
+        if(ScenesData.riddlesReceived == 0)
         {
-            foundRiddles[i] = 0;
+            foundRiddles = new int[receivedRiddlesTexts.Length];
+            foundRiddles[0] = 1;
+            ScenesData.riddlesReceived = 1;
+            currentRiddleText = "";
         }
-        foundRiddles[0] = 1;
-        currentRiddleText = "";
+        ScenesData.playerNumber = playerNumber;
         receivedRiddlesCoords.CopyTo(riddlesCoords, 0);
         receivedTreasureCoords.CopyTo(treasureCoords, 0);
         receivedRiddlesTexts.CopyTo(riddlesTexts, 0);
-        for (int i = 0, j = 0; i < riddlesTexts.Length; i++, j += 2)
+        /*for (int i = 0, j = 0; i < riddlesTexts.Length; i++, j += 2)
         {
-           /* Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
-            Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);*/
+            Debug.Log("Riddle " + (i + 1) + " text : " + riddlesTexts[i]);
+            Debug.Log("Riddle " + (i + 1) + " x coord: " + riddlesCoords[j] + " y coord: " + riddlesCoords[j + 1]);
         }
-        /*Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);*/
+        Debug.Log("Treasure x coord: " + treasureCoords[0] + " y coord: " + treasureCoords[1]);*/
     }
 
     public void CalculateDistanceBetweenUserAndRiddles()
@@ -102,7 +102,7 @@ public class ARLocalization : MonoBehaviour
             double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
             if (distanceInMetres < 20)
             {
-                foundRiddles[j] = 1;
+                //foundRiddles[j] = 1;
                 currentRiddleText = riddlesTexts[j];
                 currentRiddleNumber = j;
                 nearRiddle = true;

@@ -14,6 +14,7 @@ public class ScenesData
     public static bool backToLobby = false;
     public static double[] playersCoords = new double[8];
     public static double[] lastPlayersCoords = new double[8];
+    public static int riddlesReceived = 0;
     public static string roomCode="";
     public static void AddNewRiddleCoords(Vector2d latLong)
     {

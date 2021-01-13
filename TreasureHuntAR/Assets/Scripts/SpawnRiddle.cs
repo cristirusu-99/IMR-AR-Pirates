@@ -12,9 +12,9 @@ public class SpawnRiddle : MonoBehaviour
     public GameObject placementIndicator;
     public GameObject treasureObject;
     public GameObject riddleMessage;
-    private float timeToAppearTreasure = 3f;
+    private float timeToAppearTreasure = 4f;
     private float timeWhenDisappearTreasure = 0;
-    private float timeToAppearRiddle = 3f;
+    private float timeToAppearRiddle = 4f;
     private float timeWhenDisappearRiddle = 0;
     private ARRaycastManager aRRaycastManager;
     private Pose placementPose;
@@ -42,11 +42,11 @@ public class SpawnRiddle : MonoBehaviour
                 double[] currentLocation = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().GetCurrentLocation();
                 float bearing = (float)GameObject.Find("ARLocalization").GetComponent<ARLocalization>().CalculateBearingInDegreesBetweenTwoCoords(currentLocation[0], currentLocation[1], riddlesCoords[2 * currentRiddleNumber], riddlesCoords[2 * currentRiddleNumber + 1]);
                 float degrees = GameObject.Find("ARLocalization").GetComponent<CompassBehaviour>().degrees;
-                if (GameObject.Find("DebugText1").GetComponent<Text>().text == "")
+                /*if (GameObject.Find("DebugText1").GetComponent<Text>().text == "")
                 {
                     GameObject.Find("DebugText1").GetComponent<Text>().text = currentRiddleText;
                    
-                }
+                }*/
                 if (bearing > degrees)
                 {
                     
@@ -66,6 +66,7 @@ public class SpawnRiddle : MonoBehaviour
                         {
                             timeWhenDisappearRiddle = Time.time + timeToAppearRiddle;
                             riddleMessage.SetActive(true);
+                            foundRiddles[currentRiddleNumber] = 1;
                             //GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
                             PlaceObject(currentRiddleNumber);
                         }
@@ -89,6 +90,7 @@ public class SpawnRiddle : MonoBehaviour
                         {
                             timeWhenDisappearRiddle = Time.time + timeToAppearRiddle;
                             riddleMessage.SetActive(true);
+                            foundRiddles[currentRiddleNumber] = 1;
                             //GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
                             PlaceObject(currentRiddleNumber);
                         }
@@ -145,12 +147,12 @@ public class SpawnRiddle : MonoBehaviour
     {
         if (placementPoseIsValid)
         {
-            placementIndicator.SetActive(true);
+            //placementIndicator.SetActive(true);
             placementIndicator.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
         }
         else
         {
-            placementIndicator.SetActive(false);
+            //placementIndicator.SetActive(false);
         }
     }
 
