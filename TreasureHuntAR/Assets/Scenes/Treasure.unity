@@ -681,8 +681,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Acum ai ajuns la final. Selecteaza locatia comorii si vezi daca exista
-    cineva care poate sa o gaseasca.
+  m_Text: Now you need to set the treasure location.
 --- !u!222 &738641206
 CanvasRenderer:
   m_ObjectHideFlags: 0

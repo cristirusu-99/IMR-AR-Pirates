@@ -11,8 +11,11 @@ public class SpawnRiddle : MonoBehaviour
     public GameObject treasure;
     public GameObject placementIndicator;
     public GameObject treasureObject;
-    private float timeToAppear = 3f;
-    private float timeWhenDisappear = 0;
+    public GameObject riddleMessage;
+    private float timeToAppearTreasure = 3f;
+    private float timeWhenDisappearTreasure = 0;
+    private float timeToAppearRiddle = 3f;
+    private float timeWhenDisappearRiddle = 0;
     private ARRaycastManager aRRaycastManager;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
@@ -50,7 +53,7 @@ public class SpawnRiddle : MonoBehaviour
                 }
                 else
                 {
-                    GameObject.Find("DebugText2").GetComponent<Text>().text = Math.Min(degrees - bearing, 360 - degrees + bearing).ToString();
+                    //GameObject.Find("DebugText2").GetComponent<Text>().text = Math.Min(degrees - bearing, 360 - degrees + bearing).ToString();
                 }
                 if (bearing > degrees)
                 {
@@ -61,8 +64,17 @@ public class SpawnRiddle : MonoBehaviour
 
                         if (GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
                         {
-                            GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
+                            timeWhenDisappearRiddle = Time.time + timeToAppearRiddle;
+                            riddleMessage.SetActive(true);
+                            //GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
                             PlaceObject(currentRiddleNumber);
+                        }
+                        else
+                        {
+                            if (Time.time >= timeWhenDisappearRiddle)
+                            {
+                                riddleMessage.SetActive(false);
+                            }
                         }
 
                     }
@@ -75,8 +87,17 @@ public class SpawnRiddle : MonoBehaviour
  
                         if (GameObject.Find("RiddleObject" + currentRiddleNumber) == null)
                         {
-                            GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
+                            timeWhenDisappearRiddle = Time.time + timeToAppearRiddle;
+                            riddleMessage.SetActive(true);
+                            //GameObject.Find("DebugText2").GetComponent<Text>().text = currentRiddleNumber.ToString();
                             PlaceObject(currentRiddleNumber);
+                        }
+                        else
+                        {
+                            if (Time.time >= timeWhenDisappearRiddle)
+                            {
+                                riddleMessage.SetActive(false);
+                            }
                         }
 
                     }
@@ -87,13 +108,13 @@ public class SpawnRiddle : MonoBehaviour
             {
                 if (GameObject.Find("Treasure") == null)
                 {
-                    timeWhenDisappear = Time.time + timeToAppear;
+                    timeWhenDisappearTreasure = Time.time + timeToAppearTreasure;
                     treasureObject.SetActive(true);
                     PlaceTreasure();
                 }
                 else
                 {
-                    if(Time.time >= timeWhenDisappear)
+                    if(Time.time >= timeWhenDisappearTreasure)
                     {
                         treasureObject.SetActive(false);
                     }

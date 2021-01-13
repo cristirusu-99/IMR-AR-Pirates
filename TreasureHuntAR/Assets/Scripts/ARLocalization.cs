@@ -80,6 +80,7 @@ public class ARLocalization : MonoBehaviour
         {
             foundRiddles[i] = 0;
         }
+        foundRiddles[0] = 1;
         currentRiddleText = "";
         receivedRiddlesCoords.CopyTo(riddlesCoords, 0);
         receivedTreasureCoords.CopyTo(treasureCoords, 0);
@@ -96,7 +97,7 @@ public class ARLocalization : MonoBehaviour
     {
         double[] userLocation = GetCurrentLocation();
         bool nearRiddle = false;
-        for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
+        for (int i = 2, j = 1; i < riddlesCoords.Length; i += 2, j++)
         {
             double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
             if (distanceInMetres < 20)
@@ -116,6 +117,22 @@ public class ARLocalization : MonoBehaviour
         if(distanceInMetresTreasure < 20)
         {
             treasureFound = true;
+            for(int i = 0; i < foundRiddles.Length; i++)
+            {
+               if(foundRiddles[i] != foundRiddles[0])
+                {
+               
+                    treasureFound = false;
+                }
+       
+            }
+            if(treasureFound == true)
+            {
+                if(foundRiddles[0] == 0)
+                {
+                    treasureFound = false;
+                }
+            }
         }
     }
 
