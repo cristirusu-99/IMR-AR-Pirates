@@ -1451,13 +1451,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 530876399}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &530985056
 GameObject:
   m_ObjectHideFlags: 0
@@ -4657,7 +4657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPlace: {fileID: 2375549620899192533, guid: 05f889a2fd1a50d42b7ffd11c2f48dc2,
     type: 3}
-  treasure: {fileID: 4371189015009565388, guid: ace7cfc8aeb3cb241bbeb69a01d8bdc1,
+  treasure: {fileID: 4371189015009565388, guid: c3ef67bdaa2ea3148b543528fdbfa624,
     type: 3}
   placementIndicator: {fileID: 1836935665}
   treasureObject: {fileID: 2123119773}
