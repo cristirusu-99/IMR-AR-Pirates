@@ -97,15 +97,27 @@ public class ARLocalization : MonoBehaviour
     {
         double[] userLocation = GetCurrentLocation();
         bool nearRiddle = false;
-        for (int i = 2, j = 1; i < riddlesCoords.Length; i += 2, j++)
+        bool foundOtherRiddles = true;
+        for (int i = 0, j = 0; i < riddlesCoords.Length; i += 2, j++)
         {
             double distanceInMetres = DistanceInMetres(userLocation[0], userLocation[1], riddlesCoords[i], riddlesCoords[i + 1]);
             if (distanceInMetres < 20)
             {
                 //foundRiddles[j] = 1;
-                currentRiddleText = riddlesTexts[j];
-                currentRiddleNumber = j;
-                nearRiddle = true;
+                for(int k = 0; k < j; k++)
+                {
+                    if(foundRiddles[k] != 1)
+                    {
+                        foundOtherRiddles = false;
+                    }
+                }
+                if(foundOtherRiddles == true)
+                {
+                    currentRiddleText = riddlesTexts[j];
+                    currentRiddleNumber = j;
+                    nearRiddle = true;
+                }
+                
             }
 
         }

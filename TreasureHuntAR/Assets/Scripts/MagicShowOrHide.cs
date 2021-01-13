@@ -50,8 +50,9 @@ public class MagicShowOrHide : MonoBehaviour
 
                 if (foundRiddles[i] == 1)
                 {
-                    GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
-                    GameObject.Find("Riddle" + (i + 1).ToString()).gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().fontSize = 70;
+                    makeitGONE.transform.GetChild(i).gameObject.SetActive(true);
+                    makeitGONE.transform.GetChild(i).GetChild(0).gameObject.SetActive(true);
+                    makeitGONE.transform.GetChild(i).GetChild(0).gameObject.GetComponent<Text>().text = riddlesTexts[i];
                 }
             }
         }

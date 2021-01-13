@@ -29,7 +29,14 @@ public class SpawnRiddle : MonoBehaviour
     {
         UpdatePlacementPose();
         UpdatePlacementIndicator();
-
+        if (Time.time >= timeWhenDisappearRiddle)
+        {
+            riddleMessage.SetActive(false);
+        }
+        if (Time.time >= timeWhenDisappearRiddle)
+        {
+            riddleMessage.SetActive(false);
+        }
         if (placementPoseIsValid)
         {
             string currentRiddleText = GameObject.Find("ARLocalization").GetComponent<ARLocalization>().currentRiddleText;
@@ -72,10 +79,7 @@ public class SpawnRiddle : MonoBehaviour
                         }
                         else
                         {
-                            if (Time.time >= timeWhenDisappearRiddle)
-                            {
-                                riddleMessage.SetActive(false);
-                            }
+                            
                         }
 
                     }
@@ -96,10 +100,7 @@ public class SpawnRiddle : MonoBehaviour
                         }
                         else
                         {
-                            if (Time.time >= timeWhenDisappearRiddle)
-                            {
-                                riddleMessage.SetActive(false);
-                            }
+                            
                         }
 
                     }
