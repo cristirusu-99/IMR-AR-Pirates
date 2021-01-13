@@ -84,7 +84,7 @@ public class PhotonConnection : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        if(ScenesData.CheckNumberOfZerosRiddleCoordAndTreasure()==0)
+        if(ScenesData.CheckNumberOfZerosRiddleCoordsAndTreasure()==0)
         {
             Text roomCode = GameObject.Find("RoomCode").GetComponent<Text>();
             Debug.Log("Created room with code: " + roomCode.text.Substring(roomCode.text.Length - 4, 4) + " lenght " + (roomCode.text.Length - (roomCode.text.Length - 4)));

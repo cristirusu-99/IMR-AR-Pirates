@@ -20,18 +20,21 @@ public class ScenesData
         riddlesCoords[2 * (currentRiddle - 1)] = latLong.x;
         riddlesCoords[2 * (currentRiddle - 1) + 1] = latLong.y;
     }
-    public static int CheckNumberOfZerosRiddleCoordAndTreasure()
+    public static int CheckNumberOfZerosRiddleCoordsAndTreasure()
     {
-        int nr = 0;
+        int nrForRiddle = 0;
+        int nrForTreasure = 0;
         for(int i=0;i<10;i++)
         {
-            if (riddlesCoords[i] == 0) nr++;
+            if (riddlesCoords[i] == 0) nrForRiddle++;
         }
-        for(int i=0;i<2;i++)
+        for (int i = 0; i < 2; i++)
         {
-            if (treasureCoords[i] == 0) nr++;
+            if (treasureCoords[i] == 0) nrForTreasure++;
         }
-        if (nr == 12 || nr==10)
+        if (nrForRiddle == 10)
+            return 1;
+        else if (nrForTreasure == 2)
             return 1;
         else
             return 0;
